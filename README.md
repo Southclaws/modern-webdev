@@ -444,6 +444,8 @@ https://www.npmjs.com/package/create-react-app
 
 ### Setting up the Project Workspace
 
+#### Directory Paths Primer
+
 So, _once again_ back to `create-react-app`, you can execute the tool by typing
 it into your terminal. _But don't do it just yet!_ If you look at the terminal,
 you'll notice something like
@@ -468,3 +470,176 @@ The difference between absolute and relative is very important and you'll
 instantly understand once you're shown some examples and try it out for yourself
 and gain an intuition for navigating file systems without a graphical browser
 like Windows Explorer.
+
+So, lets say you've just opened an integrated terminal in vscode. If you run
+`pwd`, this is a very simple program that will simply print out the **current
+working directory**. "pwd" stands for "print working directory" and it's an old
+Unix tool.
+
+You should see something like:
+
+```bash
+/c/Users/UserName
+```
+
+Which shows you that you're on the `C:\` drive and you're currently in the
+directory `UserName` which is inside `Users`.
+
+I'm going to assume you have a typical Windows layout - so your user folder
+should contain a folder named `Documents` - if this is not the case, just open
+up your user folder and look for another folder to use for this demo.
+
+Type `cd Documents` that will **c**hange **d**irectory to your `Documents`
+directory. The `Documents` part of that command is a _path_, more specifically
+it's a **_relative_ path**, relative to your current directory.
+
+You could achieve the exact same outcome by typing
+`cd /c/Users/UserName/Documents` but that's a lot of typing so most of the time
+you can just use relative paths.
+
+But what if you want to go to the directory that _contains_ your current
+directory, wouldn't you have to type `cd /c/Users`? _No_ just type `cd ..`.
+Here, `..` is special directory path notation and it means **up one level**.
+
+The reason it means "up" is because directory systems are considered a _tree_
+and most people visualise trees as growing downward, like this:
+
+```bash
+/c/
+├── OtherStuff/
+└── Users/
+    ├── Bob/
+    │   └── Documents/
+    └── UserName/
+        ├── Documents/
+        ├── Music/
+        └── Pictures/
+```
+
+So imagine, if you are here:
+
+```bash
+/c/
+├── OtherStuff/
+└── Users/
+    ├── Bob/
+    │   └── Documents/
+    └── UserName/ <<< HERE!
+        ├── Documents/
+        ├── Music/
+        └── Pictures/
+```
+
+And you go "up" then you end up here:
+
+```bash
+/c/
+├── OtherStuff/
+└── Users/ <<< HERE
+    ├── Bob/
+    │   └── Documents/
+    └── UserName/
+        ├── Documents/
+        ├── Music/
+        └── Pictures/
+```
+
+Because `Users` is the directory that _contains_ `UserName`. Another word for
+this would be _parent_ directory. And, you might have guessed that the
+directories _inside_ a parent directory are the _children_. And, keeping with
+the kinship terminology, folders that are _beside_ each other in the tree are
+_siblings_. So here, `UserName` and `Bob` are siblings of each other and
+children of `Users`.
+
+#### Create a Folder
+
+So now you know the basics of directories, you need to `cd` to a place where you
+want to create your React project. You could `cd` to your Documents and make it
+there. Now, the `create-react-app` tool will create a directory for you but you
+might want to create a general "Projects" directory if you plan to make a few
+different websites/apps/etc. For that you can just `mkdir MyNewCoolDirectory`
+and that will create a directory in your current working directory.
+
+If you did `cd Documents` from your User folder, so you're here:
+
+```bash
+/c/
+├── OtherStuff/
+└── Users/
+    ├── Bob/
+    │   └── Documents/
+    └── UserName/
+        ├── Documents/ <<< HERE!
+        ├── Music/
+        └── Pictures/
+```
+
+And then you typed `mkdir Projects` then your directory tree would expand:
+
+```bash
+/c/
+├── OtherStuff/
+└── Users/
+    ├── Bob/
+    │   └── Documents/
+    └── UserName/
+        ├── Documents/
+            └── Projects/
+        ├── Music/
+        └── Pictures/
+```
+
+Then you could `cd Projects` and then move to the next bit.
+
+also notice how typing `mkdir` is _way_ faster than
+
+*   opening a folder in explorer
+*   right clicking in some blank space
+*   hovering over "new" until the other menu appears
+*   moving your mouse to the new menu
+*   missing slightly so the menu closes
+*   doing it again
+*   clicking "New Folder"
+*   typing a name once the folder appears
+
+#### Finally Running `create-react-app`
+
+Now that you're in `Projects` you can now run `create-react-app` and you'll be
+greeted by:
+
+```
+Please specify the project directory:
+  create-react-app <project-directory>
+
+For example:
+  create-react-app my-react-app
+
+Run create-react-app --help to see all options.
+```
+
+Just like `git` did earlier (and most other command line apps) running the tool
+with no parameters or flags just prints out some helpful documentation. From
+this, you now know you can precede the command with the project directory, for
+example `my-react-app`.
+
+It doesn't matter what you name it as you can always rename it later so in the
+example I'll name it `cool-react-thing`. The command we are going to run is a
+bit more complex than just `create-react-app my-react-app` though. Because we
+want to dive straight into TypeScript to benefit from strict types and very
+useful development tools that simply can't work with plain JavaScript.
+
+```bash
+create-react-app cool-react-thing --scripts-version=react-scripts-ts
+```
+
+That extra part at the end is a flag `--scripts-version` followed by a parameter
+for that flag: `react-scripts-ts` where `ts` refers to TypeScript.
+`--scripts-version` is a special flag that tells `create-react-app` to use a
+different set of scripts to set up the project. By default, `create-react-app`
+will use plain JavaScript but by using this flag, we can force it to use
+`react-scripts-ts` which is a
+[package on npm](https://www.npmjs.com/package/react-scripts-ts).
+
+Anyway, once you run the command, a whole bunch of stuff will happen. What's
+happening exactly is the tool is automatically downloading a ton of
+_dependencies_ that React needs
