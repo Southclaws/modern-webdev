@@ -178,6 +178,30 @@ these are what I deem to be the objective _best_ tools for the job _currently_.
 Once you're more experienced you can experiment and prove me wrong but so far,
 these are what I've found to be the most optimal way to do the things I do.
 
+### A Side Note regarding "Command Line tools"
+
+Most of what you're about to install are considered "Command Line"
+applications/programs/tools/apps/etc. What is meant by "Command Line" is the
+PowerShell/CMD/Bash terminal - that is also known as a "command line" (hence the
+name "Command Prompt" on Windows, also known simply as "cmd")
+
+A "Command Line" tool is typically an app you run by typing its name into a
+shell. `git` is a perfect example of a command line tool. The only way you
+interact with git is by executing it.
+
+Typically, command line tools do _one thing_ at a time then exit. They don't run
+in the background or open in a window or do anything like that, they do what
+they are asked and then they exit.
+
+When you typed `git` in the terminal above, the default behaviour is to print
+out the short help message and exit. Most other actions with most other command
+line apps follow this pattern of being executed and then immediately exiting.
+
+I'm explaining this because it's probably quite a new concept to those of you
+who are used to using apps with graphical interfaces. You open up Google Chrome
+and browse the internet, you don't open up Chrome with a specific instruction to
+display facebook.com for 5 seconds then exit immediately.
+
 ### Node.js
 
 https://nodejs.org/en/ - side note: get LTS, LTS means "Long Term Support" which
@@ -197,6 +221,13 @@ some other regular programming language. When Node.js was released, the tech
 world started to build websites _entirely_ in JavaScript. That means the HTTP
 Servers would be written in JS and the browser code would be in JS - this was
 great news for JavaScript programmers as it just meant more jobs!
+
+When you install it, take note of the "Add to PATH" bit:
+
+![node-install.png](node-install.png)
+
+I will refer back to this in a later section because it's an important concept
+to understand!
 
 #### JavaScript vs Java vs ECMAScript
 
@@ -274,6 +305,66 @@ This is common in technical documentation.
 If I say "run this" or "run `something in an inline code block`" it always means
 "type this thing into a shell such as bash or cmd or powershell".
 
+### That "Add to PATH" Thing I Mentioned
+
+You're probably wondering why I pointed that little detail of an installer out
+and why PATH is in capitals.
+
+What this is referring to is an **environment variable** named `PATH` (well on
+Windows it's usually named `Path` but on Unix it's always uppercase, anyway case
+doesn't matter) the importance of this is too great to not devote an entire
+section to its significance.
+
+The reason you can type `git` or `notepad` - or any of the hundreds of
+commands - and get a response is because the operating system knows _where_ to
+find these applications. When you type `git` the shell is actually _executing_ a
+program named `git.exe`. How does it know _where_ `git.exe` is located? PATH!
+
+As I said, `PATH` is an **environment variable** which is essentially a global
+variable that's so global, the entire operating system and all the programs
+inside it can access it. There are lots of environment variables on any
+operating system (Windows and Unix both use environment variables) and you can
+see them by either typing `SET` in a **Command Prompt** window. For some reason
+this only works in Command Prompt:
+
+```bash
+C:\Users\Southclaw>set
+ACLOCAL_PATH=C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+ADSK_CLM_WPAD_PROXY_CHECK=FALSE
+ALLUSERSPROFILE=C:\ProgramData
+ANSICON=148x1000 (148x42)
+ANSICON_DEF=7
+APPDATA=C:\Users\Southclaw\AppData\Roaming
+
+(and it goes on... and on... and on...)
+```
+
+Anyway, back to `PATH` and its significance. The whole reason `PATH` exists is
+to store a list of directories that contain applications. So when you type
+_anything_ at a prompt, the shell will load the `PATH` variable then look at
+each directory that it contains and check if any of those directories contain a
+`.exe` file that matches what you typed.
+
+You can view your `PATH` variable contents in two ways:
+
+1.  typing `echo %PATH%` in a command prompt
+2.  opening Start, searching for `Environment Variables`
+
+    clicking on
+
+    ![env-search.png](env-search.png)
+
+    then clicking on
+
+    ![env-click.png](env-click.png)
+
+    then double clicking on
+
+    ![env-path.png](env-path.png)
+
+    then you can see a nice list of directories that exist within the `PATH`
+    variable.
+
 ## vscode first steps
 
 Okay we're _almost_ to the point of **_Actually Doing Things™_**
@@ -292,11 +383,15 @@ often much faster than doing it with a mouse.
 
 Press `CTRL+Shift+P` to open up the **Command Palette**.
 
+![command-palette.gif](command-palette.gif)
+
 This is **mission control** of vscode, this is where you access almost all the
 functionality of both the editor and the language-specific extensions.
 
 Now with the **Command Palette** open, type `viewterminal` and you'll see the
 option `View: Toggle Integrated Terminal`. Hit Enter to show a terminal.
+
+![integrated-terminal-open.gif](integrated-terminal-open.gif)
 
 Notice how you only need to type a small amount of characters to get a command
 to show. The **Command Palette** is clever and uses all sorts of useful
@@ -306,20 +401,41 @@ only have to type `view` or something.
 
 You should now see something like this:
 
-![INTEGRATED TERMINAL CMD/PS]()
+![integrated-terminal-cmd.png](integrated-terminal-cmd.png)
+
+Or maybe this if you're using CMD as the default terminal (Windows 10 changed
+the default some time in 2017 I think).
+
+![integrated-terminal-ps.png](integrated-terminal-ps.png)
 
 There's a problem though, this terminal is using Command Prompt or PowerShell as
-the default because that's what Windows has installed by default. You can change
-this in settings by hitting `CTRL+,` and searching for
-`terminal.integrated.shell.windows` and switching `cmd` for
-`C:\Program Files\Git\bin\git-bash.exe`. Then close the terminal by clicking
-![]() and open a new one. (but this time use the keyboard shortcut for opening
-the terminal, It's CTRL+` which is that weird apostrophe character to the left
-of 1 on the keyboard, just above Tab)
+the default because that's what Windows has installed by default. You are going
+to change this in settings by hitting `CTRL+,` and searching for
+`terminal.integrated.shell.windows`:
+
+![set-term-search.png](set-term-search.png)
+
+Then copying the default to your own settings:
+
+![set-term-copy.gif](set-term-copy.gif)
+
+And then switching what's already in the quotes to the right for
+`C:/Program Files/Git/bin/bash.exe`. This is the default installation path for
+Git's version of Bash, the only way I think this can change is if you install
+the 32 bit version of it, in which case the path will be in
+`Program Files (x86)`. You can always navigate to this folder just to check
+anyway.
+
+Once you've done that, and saved the settings file with `CTRL+S`, delete the
+terminal that you already opened by clicking ![bin.png](bin.png) and open a new
+one. (but this time use the keyboard shortcut for opening the terminal, It's
+CTRL+` which is that weird apostrophe character to the left of 1 on the
+keyboard, just above Tab)
 
 Great, now you should see this:
 
-![INTEGRATED TERMINAL BASH]()
+![integrated-terminal-bash.png](integrated-terminal-bash.png) _it also has
+pretty colours!_
 
 You can type `nodepad.exe` to open up Windows notepad then close it because
 you'll never use that program again.
@@ -338,127 +454,71 @@ usage: git [--version] [--help] [-C <path>] [-c name=value]
 (followed by more documentation for how git works)
 ```
 
-## Create React App (TypeScript!)
+![git.gif](git.gif)
 
-Now you have an editor and a shell set up, it's time to install a **JavaScript
-Command Line Tool**.
+## Creating a React App with TypeScript
 
-A "Command Line" tool is typically an app you run by typing its name into a
-shell. `git` is a perfect example of a command line tool. The only way you
-interact with git is by executing it.
-
-Typically, command line tools do _one thing_ at a time then exit. They don't run
-in the background or open in a window or do anything like that, they do what
-they are asked and then they exit.
-
-When you typed `git` in the terminal above, the default behaviour is to print
-out the short help message and exit. Most other actions with most other command
-line apps follow this pattern of being executed and then immediately exiting.
-
-I'm explaining this because it's probably quite a new concept to those of you
-who are used to using apps with graphical interfaces. You open up Google Chrome
-and browse the internet, you don't open up Chrome with a specific instruction to
-display facebook.com for 5 seconds then exit immediately.
-
-### `npm install -g`
-
-So, now that's out of the way it's time to install an app. To make sure you have
-`npm` (I'll explain what that is shortly) installed properly (it comes with
+Now you have an editor and a shell set up, it's time to create directory for the
+project and then turn that directory into an _npm package_. To make sure you
+have `npm` (I'll explain what that is shortly) installed properly (it comes with
 Node.js) run `npm --version` on the terminal and you should see:
 
 ```bash
 5.3.0
 ```
 
+![npm-version](npm-version)
+
 The version number will probably differ to that depending on when you read this.
 
-Okay, `npm` installed? Great.
+If nothing comes up, I'm not prepared for that, shoot me an email/open a github
+issue/tweet me/discord me/etc and I'll figure out why that happened and how this
+section of the tutorial can be improved!
 
-Now run `npm install -g create-react-app` and a lot of stuff will happen.
-
-You just installed a JavaScript package. Now there's a lot to digest here so
-this section will be quite long.
-
-#### Packages and Ecosystems
-
-Back in The Day™ you'd write code then run it. Nowadays, no one has time to
-write code, so everyone just uses code that other people have written. This is
-where a **Package Ecosystem** comes in.
-
-I'll elaborate on that first sentence. In earlier times of software development,
-companies or individuals would often write _all_ their code themselves. There
-was very little sharing (You had to pay $40 for a C compiler in the 70's!).
-
-On top of that, using someone else's (or some other company's) code was awkward.
-Because most languages were compiled and there were so many different types of
-CPU architecture, it was very difficult to grab some source code files and
-integrate them into your own codebase.
-
-Nowadays, most computers are the same under-the-hood and a lot of our
-programming languages do some really clever things to help make sharing code
-much easier. Sharing code is incredibly important to prevent developers from
-re-writing the same old thing that has been written thousands of times before.
-
-So, that brings us to `npm`. NPM stands for "Node Package Manager" and is a
-**Package Manager** for JavaScript. Lots of languages have Package Managers and
-they usually do three things:
-
-*   Provide developers with a way to share code they have written so that they
-    can get recognition for their work and build a portfolio
-*   Provide users with a way to easily acquire code that has been shared by
-    others and use it in their own code
-*   Provide additional tools and useful things that can make the entire
-    development process a bit easier
-
----
-
-So, back to `create-react-app` that thing you just installed. That thing is a
-command line tool for **bootstrapping** a ReactJS project. What it does is
-create all the necessary files and folders and installs all the necessary
-packages for starting a ReactJS project.
-
-You did that by _invoking_ the `npm` command line tool with the following
-_arguments_:
-
-*   `install` typically, command line apps follow a "verb noun" structure, you
-    invoke the application with a verb word to specify **what** you want to do
-    followed, sometimes, by a noun verb which specifies some _thing_ you want to
-    do that thing either _to_ or _with_. This is in no way a rule for command
-    line apps, it's just a common pattern that most apps follow.
-*   `-g` this means "global", and in fact it's _shorthand_ for `--global`. This
-    notation with the `-` character followed by a letter is also a common
-    command line app pattern. These are known as "flags" and the version with
-    `--` before it is a longer version of the single letter `-` version. You'll
-    encounter more of these flags as we progress.
-*   `create-react-app` is the name of the package. You might be wondering what
-    relevance this even has and where npm is getting this from. I'll cover that
-    in detail in the next bit.
-
-#### npm
-
-npm isn't just a command line tool, it's also a service that provides public
-storage of packages. Every package has a page and you can see the one you just
-installed at:
-
-https://www.npmjs.com/package/create-react-app
+(side note: because I have all of this stuff already installed, it's hard to
+truly go through the "first time" user experience and catch a lot of these
+little issues, so apologies!)
 
 ### Setting up the Project Workspace
 
+Like most things (things meaning video editing projects, 3D projects, music,
+etc) you group project files into a directory. Most programming languages use
+directories, not only as a means of grouping files but also as the primary way
+of packaging and managing code.
+
+For example, to create a new npm package you'd type `npm init` which would
+create the necessary files in your current directory. And likewise, vscode
+doesn't just "open" files, it "opens" directories too and this helps extensions
+understand where all your files are located in order to provide useful tools
+that you'll discover later on.
+
 #### Directory Paths Primer
 
-So, _once again_ back to `create-react-app`, you can execute the tool by typing
-it into your terminal. _But don't do it just yet!_ If you look at the terminal,
-you'll notice something like
+Like I just mentioned, you can execute `npm init` by typing it into your
+terminal. _But don't do it just yet!_ If you look at the terminal, you'll notice
+something like
 
-`userName@computerName ~/`
+```bash
+userName@computerName MINGW64 ~
+```
+
+This is called the "prompt". It's called that because it, quite literally, is
+prompting you to enter a command (oldschool terminology has a way of sticking
+around in computing). This describes your shell's state including the user who
+is logged in (`userName`) the name of the computer you're logged into
+(`computerName`) and `MINGW64` which isn't important in any way right now (it's
+the name of the underlying implementation of Bash on this platform, see I told
+you it wasn't important).
 
 Another important thing to know about shells is that they have a _position_. By
 that I mean, an instance of a shell _runs_ in a particular directory on your
 hard drive. Bash defaults to your _home directory_ which, on Windows, is located
-at `C:\Users\YourName`.
+at `C:\Users\YourName`. This is exactly what `~` means at the end of this line.
+This is an old Unix convention where `~` is a special character used only at the
+beginning of directory paths that always refers to your "home directory".
 
-Now if you were to run `create-react-app` right here, you'd create a React
-project in your user directory. I can bet right now you don't want to do that if
+Now if you were to run `npm init` right here, you'd turn your entire user
+directory into an npm package. I can bet right now you don't want to do that if
 you have any semblance of organisation in your computer's file system. So what
 you need to do is change your shell's **current working directory** to another
 location on your drive.
@@ -491,15 +551,23 @@ up your user folder and look for another folder to use for this demo.
 
 Type `cd Documents` that will **c**hange **d**irectory to your `Documents`
 directory. The `Documents` part of that command is a _path_, more specifically
-it's a **_relative_ path**, relative to your current directory.
+it's a **_relative_ path**, relative to your current directory. Also, you'll
+notice the prompt has changed to:
+
+```bash
+userName@computerName MINGW64 ~/Documents
+```
+
+![cd.gif](cd.gif)
 
 You could achieve the exact same outcome by typing
 `cd /c/Users/UserName/Documents` but that's a lot of typing so most of the time
 you can just use relative paths.
 
 But what if you want to go to the directory that _contains_ your current
-directory, wouldn't you have to type `cd /c/Users`? _No_ just type `cd ..`.
-Here, `..` is special directory path notation and it means **up one level**.
+directory, wouldn't you have to type `cd /c/Users`? _No_ just type `cd ..` - Now
+the `..` in that example is special directory path notation and it means **up
+one level**.
 
 The reason it means "up" is because directory systems are considered a _tree_
 and most people visualise trees as growing downward, like this:
@@ -644,3 +712,37 @@ Anyway, once you run the command, a whole bunch of stuff will happen. What's
 happening exactly is the tool is automatically downloading a ton of
 _dependencies_ that React needs and setting up the folder structure for the
 project. Once it has finished, you can now open vscode there.
+
+#### Packages and Ecosystems
+
+npm isn't just a command line tool, it's also a service that provides public
+storage of _packages_.
+
+Back in The Day™ you'd write code then run it. Nowadays, no one has time to
+write code, so everyone just uses code that other people have written. This is
+where a **Package Ecosystem** comes in.
+
+I'll elaborate on that first sentence. In earlier times of software development,
+companies or individuals would often write _all_ their code themselves. There
+was very little sharing (You had to pay $40 for a C compiler in the 70's!).
+
+On top of that, using someone else's (or some other company's) code was awkward.
+Because most languages were compiled and there were so many different types of
+CPU architecture, it was very difficult to grab some source code files and
+integrate them into your own codebase.
+
+Nowadays, most computers are the same under-the-hood and a lot of our
+programming languages do some really clever things to help make sharing code
+much easier. Sharing code is incredibly important to prevent developers from
+re-writing the same old thing that has been written thousands of times before.
+
+So, that brings us to `npm`. NPM stands for "Node Package Manager" and is a
+**Package Manager** for JavaScript. Lots of languages have Package Managers and
+they usually do three things:
+
+*   Provide developers with a way to share code they have written so that they
+    can get recognition for their work and build a portfolio
+*   Provide users with a way to easily acquire code that has been shared by
+    others and use it in their own code
+*   Provide additional tools and useful things that can make the entire
+    development process a bit easier
