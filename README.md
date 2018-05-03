@@ -623,10 +623,8 @@ children of `Users`.
 
 So now you know the basics of directories, you need to `cd` to a place where you
 want to create your React project. You could `cd` to your Documents and make it
-there. Now, the `create-react-app` tool will create a directory for you but you
-might want to create a general "Projects" directory if you plan to make a few
-different websites/apps/etc. For that you can just `mkdir MyNewCoolDirectory`
-and that will create a directory in your current working directory.
+there. For that you can just `mkdir MyNewCoolDirectory` and that will create a
+directory in your current working directory.
 
 If you did `cd Documents` from your User folder, so you're here:
 
@@ -642,7 +640,8 @@ If you did `cd Documents` from your User folder, so you're here:
         └── Pictures/
 ```
 
-And then you typed `mkdir Projects` then your directory tree would expand:
+And then you typed `mkdir MyNewCoolDirectory` then your directory tree would
+expand:
 
 ```bash
 /c/
@@ -652,12 +651,12 @@ And then you typed `mkdir Projects` then your directory tree would expand:
     │   └── Documents/
     └── UserName/
         ├── Documents/
-            └── Projects/
+            └── MyNewCoolDirectory/
         ├── Music/
         └── Pictures/
 ```
 
-Then you could `cd Projects` and then move to the next bit.
+Then you could `cd MyNewCoolDirectory` and then move to the next bit.
 
 also notice how typing `mkdir` is _way_ faster than
 
@@ -670,48 +669,24 @@ also notice how typing `mkdir` is _way_ faster than
 *   clicking "New Folder"
 *   typing a name once the folder appears
 
-#### Finally Running `create-react-app`
+#### Finally Creating an _Actual App!_
 
-Now that you're in `Projects` you can now run `create-react-app` and you'll be
-greeted by:
+Now that you're in `MyNewCoolDirectory` or whatever you called it (henceforth
+referred to as the _project directory_ or _workspace_) you can now run
+`npm init`. Where `npm` is the normal node package manager app and `init` is a
+subcommand that means "**init**ialise a new package".
 
-```
-Please specify the project directory:
-  create-react-app <project-directory>
+The tool will then quiz you for some details on your new package. Most of the
+fields you can just ignore by pressing `ENTER`.
 
-For example:
-  create-react-app my-react-app
-
-Run create-react-app --help to see all options.
-```
-
-Just like `git` did earlier (and most other command line apps) running the tool
-with no parameters or flags just prints out some helpful documentation. From
-this, you now know you can precede the command with the project directory, for
-example `my-react-app`.
+![npm-init.gif](npm-init.gif)
 
 It doesn't matter what you name it as you can always rename it later so in the
-example I'll name it `cool-react-thing`. The command we are going to run is a
-bit more complex than just `create-react-app cool-react-thing` though. Because
-we want to dive straight into TypeScript to benefit from strict types and very
-useful development tools that simply can't work with plain JavaScript.
+example I'll name it `new-project-yay`. Once you run the command, a new file
+will be created in that directory. You can view the contents of that directory
+by typing `ls`:
 
-```bash
-create-react-app cool-react-thing --scripts-version=react-scripts-ts
-```
-
-That extra part at the end is a flag `--scripts-version` followed by a parameter
-for that flag: `react-scripts-ts` where `ts` refers to TypeScript.
-`--scripts-version` is a special flag that tells `create-react-app` to use a
-different set of scripts to set up the project. By default, `create-react-app`
-will use plain JavaScript but by using this flag, we can force it to use
-`react-scripts-ts` which is a
-[package on npm](https://www.npmjs.com/package/react-scripts-ts).
-
-Anyway, once you run the command, a whole bunch of stuff will happen. What's
-happening exactly is the tool is automatically downloading a ton of
-_dependencies_ that React needs and setting up the folder structure for the
-project. Once it has finished, you can now open vscode there.
+![ls.gif](ls.gif)
 
 #### Packages and Ecosystems
 
