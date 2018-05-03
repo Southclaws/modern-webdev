@@ -235,17 +235,21 @@ This needs to be mentioned. So many people get Java and JavaScript confused and
 that's fair enough (even though all programmers ever will laugh at you for that
 confusion).
 
-Read the History section of the JavaScript page to get the full picture but just
-remember:
+Read the
+[History section of the JavaScript Wikipedia page](https://en.wikipedia.org/wiki/JavaScript#History)
+to get the full picture but just remember:
 
-JavaScript is nothing to do with Java itself - the reason JavaScript was named
-that way is partially a mystery but most likely an attempt at gaining popularity
-when it was first introduced.
+**JavaScript is nothing to do with Java itself** - the reason JavaScript was
+named that way is partially a mystery but most likely an attempt at gaining
+popularity when it was first introduced.
 
-ECMAScript (or simply "ES") is the more widely accepted name. JavaScript is an
-implementation of ES and ES aims to help bridge the gap between different
-versions of very similar languages (like ActionScript and JScript... confusing I
-know)
+**ECMAScript** (or simply "ES") is becoming a more widely accepted name.
+JavaScript is an _implementation_ of ES and ES aims to help bridge the gap
+between different versions of very similar languages (like ActionScript and
+JScript... confusing I know) It's a whole mess and the name "JavaScript" will
+probably be around for a long time and cause lots of confusion but if I can
+convince just _one_ person to refer to it as ECMAScript or ES, then I've already
+made the world a better place!
 
 You will often see people refer to "ES5", "ES6" which are different versions of
 ECMAScript. I will discuss this further later in the document when it's a bit
