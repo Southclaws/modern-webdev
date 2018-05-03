@@ -624,8 +624,8 @@ example `my-react-app`.
 
 It doesn't matter what you name it as you can always rename it later so in the
 example I'll name it `cool-react-thing`. The command we are going to run is a
-bit more complex than just `create-react-app my-react-app` though. Because we
-want to dive straight into TypeScript to benefit from strict types and very
+bit more complex than just `create-react-app cool-react-thing` though. Because
+we want to dive straight into TypeScript to benefit from strict types and very
 useful development tools that simply can't work with plain JavaScript.
 
 ```bash
@@ -642,4 +642,5 @@ will use plain JavaScript but by using this flag, we can force it to use
 
 Anyway, once you run the command, a whole bunch of stuff will happen. What's
 happening exactly is the tool is automatically downloading a ton of
-_dependencies_ that React needs
+_dependencies_ that React needs and setting up the folder structure for the
+project. Once it has finished, you can now open vscode there.
