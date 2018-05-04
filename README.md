@@ -692,6 +692,14 @@ by typing `ls`:
 
 ![ls.gif](ls.gif)
 
+So now you have a project directory set up, you should probably open the
+directory in Visual Studio Code properly so you can easily navigate it and
+create/edit files there. Since you've already got vscode open, just hit `File`
+then `Open Folder`. You should now see the sidebar populated with the
+`package.json` that was created with `npm init`:
+
+![vscode-open.png](vscode-open.png)
+
 #### Packages and Ecosystems
 
 npm isn't just a command line tool, it's also a service that provides public
@@ -725,3 +733,13 @@ they usually do three things:
     others and use it in their own code
 *   Provide additional tools and useful things that can make the entire
     development process a bit easier
+
+### [Commands]
+
+npm install --save next react react-dom
+
+npm install --save @zeit/next-typescript typescript
+
+tsconfig.json
+
+npm install --save @zeit/next-sass node-sass
